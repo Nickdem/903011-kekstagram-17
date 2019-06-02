@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм» [![Build status][travis-image]][travis-url]
 
 * Студент: [Никита Демидов](https://up.htmlacademy.ru/javascript/17/user/903011).
-* Наставник: `Неизвестно`.
+* Наставник: [Илья Сидаш] (https://htmlacademy.ru/profile/id841917)
 
 ---
 
