@@ -13,6 +13,7 @@ var scaleControl = uploadWindow.querySelector('.scale__control--value');
 var scaleControlBigger = uploadWindow.querySelector('.scale__control--bigger');
 var scaleControlSmaller = uploadWindow.querySelector('.scale__control--smaller');
 var previewImage = uploadWindow.querySelector('.img-upload__preview');
+var slider = document.querySelector('.effect-level');
 
 var openUploadPreview = function () {
   uploadPreview.classList.remove('hidden');
@@ -39,17 +40,23 @@ var closeUploadPreview = function () {
 
 var increaseScaleValue = function () {
   var scaleStep = (scaleControl.value === MAX_SCALE_VALUE) ? 0 : SCALE_STEP;
-  return scaleControl.value = (parseInt(scaleControl.value, 10) + scaleStep) + '%';
+  scaleControl.value = (parseInt(scaleControl.value, 10) + scaleStep) + '%';
+
+  return scaleControl.value;
 };
 
 var decreaseScaleValue = function () {
   var scaleStep = (scaleControl.value === MIN_SCALE_VALUE) ? 0 : SCALE_STEP;
-  return scaleControl.value = (parseInt(scaleControl.value, 10) - scaleStep) + '%';
+  scaleControl.value = (parseInt(scaleControl.value, 10) - scaleStep) + '%';
+
+  return scaleControl.value;
 };
 
 var changeScale = function () {
   var currentScale = parseInt(scaleControl.value, 10);
-  return previewImage.style.transform = 'scale( ' + (currentScale / 100) + ')';
+  previewImage.style.transform = 'scale( ' + (currentScale / 100) + ')';
+
+  return previewImage.style.transform;
 };
 
 var onScaleBiggerClick = function () {

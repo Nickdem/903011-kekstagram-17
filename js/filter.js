@@ -55,9 +55,9 @@ sliderPin.addEventListener('mousedown', function (eff) {
   document.addEventListener('mouseup', onMouseUp);
 });
 
-window.initSlider = function (changeSaturation) {
-  effects.addEventListener;
-  sliderPin.addEventListener;
+window.initSlider = function () {
+  effects.addEventListener();
+  sliderPin.addEventListener();
 };
 
 var changeSaturation = function (intensityIndex) {
