@@ -16,6 +16,7 @@ var previewImage = uploadWindow.querySelector('.img-upload__preview');
 
 var openUploadPreview = function () {
   uploadPreview.classList.remove('hidden');
+  slider.style.visibility = 'hidden';
   document.addEventListener('keydown', onUploadPreviewEscPress);
 };
 
