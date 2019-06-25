@@ -21,7 +21,6 @@ var openUploadPreview = function () {
   document.addEventListener('keydown', onUploadPreviewEscPress);
 };
 
-
 var onUploadInputChange = function () {
   openUploadPreview();
 };
@@ -41,22 +40,16 @@ var closeUploadPreview = function () {
 var increaseScaleValue = function () {
   var scaleStep = (scaleControl.value === MAX_SCALE_VALUE) ? 0 : SCALE_STEP;
   scaleControl.value = (parseInt(scaleControl.value, 10) + scaleStep) + '%';
-
-  return scaleControl.value;
 };
 
 var decreaseScaleValue = function () {
   var scaleStep = (scaleControl.value === MIN_SCALE_VALUE) ? 0 : SCALE_STEP;
   scaleControl.value = (parseInt(scaleControl.value, 10) - scaleStep) + '%';
-
-  return scaleControl.value;
 };
 
 var changeScale = function () {
   var currentScale = parseInt(scaleControl.value, 10);
   previewImage.style.transform = 'scale( ' + (currentScale / 100) + ')';
-
-  return previewImage.style.transform;
 };
 
 var onScaleBiggerClick = function () {
