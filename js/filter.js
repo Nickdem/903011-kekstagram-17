@@ -7,7 +7,7 @@ var sliderLevel = slider.querySelector('.effect-level__depth');
 var imageWrap = document.querySelector('.img-upload__preview');
 var effects = document.querySelector('.effects__list');
 
-effects.addEventListener('click', function (evt) {
+var effectsListener = function (evt) {
   sliderPin.style.left = '100%';
   sliderLevel.style.width = '100%';
 
@@ -22,9 +22,9 @@ effects.addEventListener('click', function (evt) {
     imageWrap.classList.add(evt.target.classList[1]);
     changeSaturation(1);
   }
-});
+};
 
-sliderPin.addEventListener('mousedown', function (evt) {
+var sliderPinListener = function (evt) {
   evt.preventDefault();
   var startCoords = evt.clientX;
 
@@ -53,13 +53,13 @@ sliderPin.addEventListener('mousedown', function (evt) {
 
   document.addEventListener('mousemove', onMouseMove);
   document.addEventListener('mouseup', onMouseUp);
-});
+};
 
 window.initSlider = function () {
-  effects.addEventListener;
-  sliderPin.addEventListener;
+  effects.addEventListener('click', effectsListener);
+  sliderPin.addEventListener('mousedown', sliderPinListener);
 };
-//ничего не могу придумать с imageWrap.classList.contains
+// ничего не могу придумать с imageWrap.classList.contains
 var changeSaturation = function (intensityIndex) {
   if (imageWrap.classList.contains('effects__preview--chrome')) {
     imageWrap.style.filter = 'grayscale(' + intensityIndex + ')';
