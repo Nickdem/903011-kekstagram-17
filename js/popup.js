@@ -25,8 +25,10 @@ var onUploadInputChange = function () {
   openUploadPreview();
 };
 
+var textDescription = document.querySelector('.text__description');
+
 var onUploadPreviewEscPress = function (evt) {
-  if (evt.keyCode === ESC_KEYCODE) {
+  if (evt.keyCode === ESC_KEYCODE && textDescription !== document.activeElement) {
     closeUploadPreview();
   }
 };
@@ -63,9 +65,6 @@ var onScaleSmallerClick = function () {
 };
 
 scaleControlBigger.addEventListener('click', onScaleBiggerClick);
-
 scaleControlSmaller.addEventListener('click', onScaleSmallerClick);
-
 uploadInput.addEventListener('change', onUploadInputChange);
-
 uploadCancelButton.addEventListener('click', closeUploadPreview);
