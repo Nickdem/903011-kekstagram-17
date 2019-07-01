@@ -22,13 +22,11 @@ var pictureTemplate = document.querySelector('#picture')
 var picturesElement = document.querySelector('.pictures');
 
 var getRandomInt = function (min, max) {
-  var randomInt = Math.round(Math.random() * (max - min));
-  return randomInt;
+  return Math.round(Math.random() * (max - min));
 };
 
 function generateObject(number) {
-  var photo;
-  photo = {
+  var photo = {
     url: 'photos/' + (number + 1) + '.jpg',
     likes: getRandomInt(LIKES_MIN_NUMBER, LIKES_MAX_NUMBER),
     comments: generateComments(getRandomInt(0, 2))
