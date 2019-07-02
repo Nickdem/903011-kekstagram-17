@@ -23,7 +23,7 @@ var effectsListener = function (evt) {
     changeSaturation(1);
   }
 };
-
+//задание по перемещению слайдера здесь
 var sliderPinListener = function (evt) {
   evt.preventDefault();
   var startCoords = evt.clientX;
