@@ -24,7 +24,7 @@ var openUploadPreview = function () {
 var onUploadInputChange = function () {
   openUploadPreview();
 };
-// в прошлом коммите объявил эту переменную, в index.html ограничил длину в 140 символов
+
 var textDescription = document.querySelector('.text__description');
 
 var onUploadPreviewEscPress = function (evt) {
@@ -32,7 +32,7 @@ var onUploadPreviewEscPress = function (evt) {
     closeUploadPreview();
   }
 };
-// и вот это то что выше  && textDescription !== document.activeElement
+
 var closeUploadPreview = function () {
   uploadPreview.classList.add('hidden');
   document.removeEventListener('keydown', onUploadPreviewEscPress);
