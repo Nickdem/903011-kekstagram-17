@@ -5,10 +5,6 @@
     .content.querySelector('.picture');
   var picturesElement = document.querySelector('.pictures');
 
-  var getRandomInt = function (min, max) {
-    return Math.round(Math.random() * (max - min));
-  };
-
   var createPicturesDOM = function (image) {
     var picture = pictureTemplate.cloneNode(true);
     picture.querySelector('.picture__img').src = image.url;
@@ -16,9 +12,9 @@
     picture.querySelector('.picture__likes').textContent = image.likes;
 
     return picture;
-  }
+  };
 
- var successHandler = function (images) {
+  var successHandler = function (images) {
     var fragment = document.createDocumentFragment();
     for (var i = 0; i < images.length; i++) {
       fragment.appendChild(createPicturesDOM(images[i]));
