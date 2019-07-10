@@ -1,23 +1,6 @@
 'use strict';
 
 (function () {
-  var COMMENT_PHRASES = [
-    'Всё отлично!',
-    'В целом всё неплохо. Но не всё.'
-  ];
-
-  var NAMES = [
-    'Алексей',
-    'Кирилл',
-    'Георгий',
-    'Анна',
-    'Валерия',
-  ];
-
-  var LIKES_MIN_NUMBER = 15;
-  var LIKES_MAX_NUMBER = 200;
-  var NUMBER_OF_PICTURES = 25;
-
   var pictureTemplate = document.querySelector('#picture')
     .content.querySelector('.picture');
   var picturesElement = document.querySelector('.pictures');
@@ -26,30 +9,7 @@
     return Math.round(Math.random() * (max - min));
   };
 
-  function generateObject(number) {
-    var photo = {
-      url: 'photos/' + (number + 1) + '.jpg',
-      likes: getRandomInt(LIKES_MIN_NUMBER, LIKES_MAX_NUMBER),
-      comments: generateComments(getRandomInt(0, 2))
-    };
-
-    return photo;
-  }
-
-  function generateComments(amount) {
-    var comments = [];
-    for (var i = 0; i < amount; i++) {
-      comments[i] = {
-        avatar: 'img/avatar-' + getRandomInt(1, 6) + '.svg',
-        message: COMMENT_PHRASES[getRandomInt(0, COMMENT_PHRASES.length - 1)],
-        name: NAMES[getRandomInt(0, NAMES.length)]
-      };
-    }
-
-    return comments;
-  }
-
-  function createPicturesDOM(image) {
+  var createPicturesDOM = function (image) {
     var picture = pictureTemplate.cloneNode(true);
     picture.querySelector('.picture__img').src = image.url;
     picture.querySelector('.picture__comments').textContent = image.comments.length;
@@ -58,11 +18,25 @@
     return picture;
   }
 
-  var fragment = document.createDocumentFragment();
+ var successHandler = function (images) {
+    var fragment = document.createDocumentFragment();
+    for (var i = 0; i < images.length; i++) {
+      fragment.appendChild(createPicturesDOM(images[i]));
+    }
+    picturesElement.appendChild(fragment);
+  };
 
-  for (var i = 0; i < NUMBER_OF_PICTURES; i++) {
-    fragment.appendChild(createPicturesDOM(generateObject(i)));
-  }
+  var errorHandler = function (errorMessage) {
+    var node = document.createElement('div');
+    node.style = 'z-index: 10; margin: 0 auto; text-align: center; background-color: yellow; color: red;';
+    node.style.position = 'absolute';
+    node.style.left = '0';
+    node.style.right = '0';
+    node.style.fontSize = '18px';
 
-  picturesElement.appendChild(fragment);
+    node.textContent = errorMessage;
+    document.body.insertAdjacentElement('afterbegin', node);
+  };
+
+  window.load(successHandler, errorHandler);
 })();
