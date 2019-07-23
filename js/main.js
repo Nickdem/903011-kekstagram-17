@@ -20,6 +20,10 @@
       }
     });
 
+    picImg.addEventListener('click', function () {
+      window.bigsize(image);
+    });
+
     return picture;
   };
 
@@ -33,11 +37,12 @@
 
   var successHandler = function (images) {
     var fragment = document.createDocumentFragment();
-    window.fullsize(images[0]);
     for (var i = 0; i < images.length; i++) {
-      fragment.appendChild(createPicturesDOM(images[i]));
+      var photoElement = createPicturesDOM(images[i]);
+      fragment.appendChild(photoElement);
       totalImages += 1;
     }
+
     var photosRemoved = picturesElement.querySelectorAll('.picture');
 
     for (i = 0; i < photosRemoved.length; i++) {
