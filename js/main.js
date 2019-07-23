@@ -33,6 +33,7 @@
 
   var successHandler = function (images) {
     var fragment = document.createDocumentFragment();
+    window.fullsize(images[0]);
     for (var i = 0; i < images.length; i++) {
       fragment.appendChild(createPicturesDOM(images[i]));
       totalImages += 1;
@@ -58,6 +59,7 @@
   };
 
   window.load(successHandler, errorHandler);
+
   var popular = picFilter.querySelector('#filter-popular');
   var news = picFilter.querySelector('#filter-new');
   var discussed = picFilter.querySelector('#filter-discussed');
