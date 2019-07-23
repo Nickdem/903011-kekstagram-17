@@ -1,6 +1,6 @@
 'use strict';
 
-window.fullsize = function (photo) {
+window.bigsize = function (photo) {
   var bigPic = document.querySelector('.big-picture');
   var picUrl = bigPic.querySelector('.big-picture__img img');
   var likesCount = bigPic.querySelector('.likes-count');
@@ -31,4 +31,29 @@ window.fullsize = function (photo) {
 
   socCommentsCount.classList.add('visually-hidden');
   commentsLoad.classList.add('visually-hidden');
+
+  var picCancel = document.querySelector('#picture-cancel');
+
+  var closeWindow = function () {
+    bigPic.classList.add('hidden');
+    document.removeEventListener('keydown', EscPressHandler);
+  };
+
+  var EscPressHandler = function (evt) {
+    if (evt.keyCode === 27) {
+      closeWindow();
+    }
+  };
+
+  document.addEventListener('keydown', EscPressHandler);
+
+  picCancel.addEventListener('click', function () {
+    closeWindow();
+  });
+
+  picCancel.addEventListener('keydown', function (evt) {
+    if (evt.keyCode === 13) {
+      closeWindow();
+    }
+  });
 };
