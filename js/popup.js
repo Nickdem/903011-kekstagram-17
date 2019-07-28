@@ -20,7 +20,8 @@
     openUploadPreview();
   };
 
-  var commentInput = document.querySelector('.text__description');
+  var form = document.querySelector('.img-upload__form');
+  var commentInput = form.querySelector('.text__description');
 
   commentInput.addEventListener('invalid', function () {
     if (commentInput.validity.tooLong) {
@@ -28,7 +29,7 @@
     }
   });
 
-  var hashtagInput = document.querySelector('.text__hashtags');
+  var hashtagInput = form.querySelector('.text__hashtags');
 
   hashtagInput.addEventListener('input', function () {
     var hashtagError = validateHashtags(hashtagInput.value);

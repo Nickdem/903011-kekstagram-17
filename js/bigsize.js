@@ -1,6 +1,7 @@
 'use strict';
 
-window.bigsize = function (photo) {
+(function () {
+  window.bigsize = function (photo) {
   var bigPic = document.querySelector('.big-picture');
   var picUrl = bigPic.querySelector('.big-picture__img img');
   var likesCount = bigPic.querySelector('.likes-count');
@@ -57,3 +58,4 @@ window.bigsize = function (photo) {
     }
   });
 };
+})();
