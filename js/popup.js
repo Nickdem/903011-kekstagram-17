@@ -18,8 +18,31 @@
     imagePreviewElement.style.filter = 'none';
   };
 
+  var FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+  var imageInPreviewElement = document.querySelector('.img-upload__preview img');
+  var effectsPreviewElement = document.querySelectorAll('.effects__preview');
+
   var onUploadInputChange = function () {
     openUploadPreview();
+    var file = uploadInput.files[0];
+    var fileName = file.name.toLowerCase();
+    var matches = FILE_TYPES.some(function (it) {
+      return fileName.endsWith(it);
+    });
+
+    if (matches) {
+      var reader = new FileReader();
+
+      reader.addEventListener('load', function () {
+        imageInPreviewElement.src = reader.result;
+        effectsPreviewElement.forEach(function (item) {
+          item.style.backgroundImage = 'url(' + reader.result + ')';
+        });
+        openUploadPreview();
+      });
+
+      reader.readAsDataURL(file);
+    }
   };
 
   var onUploadPreviewEscPress = function (evt) {
