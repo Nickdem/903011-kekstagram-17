@@ -9,18 +9,33 @@
   var uploadInput = uploadWindow.querySelector('#upload-file');
   var uploadCancelButton = uploadWindow.querySelector('#upload-cancel');
   var slider = document.querySelector('.effect-level');
+  var imagePreviewElement = document.querySelector('.img-upload__preview');
 
   var openUploadPreview = function () {
     uploadPreview.classList.remove('hidden');
     slider.style.visibility = 'hidden';
     document.addEventListener('keydown', onUploadPreviewEscPress);
+    imagePreviewElement.style.filter = 'none';
   };
 
   var onUploadInputChange = function () {
     openUploadPreview();
   };
 
-  var commentInput = document.querySelector('.text__description');
+  var onUploadPreviewEscPress = function (evt) {
+    if (evt.keyCode === ESC_KEYCODE && !commentInput.matches(':focus') && !hashtagInput.matches(':focus')) {
+      closeUploadPreview();
+    }
+  };
+
+  var closeUploadPreview = function () {
+    uploadPreview.classList.add('hidden');
+    document.removeEventListener('keydown', onUploadPreviewEscPress);
+    uploadInput.value = '';
+  };
+
+  var form = document.querySelector('.img-upload__form');
+  var commentInput = form.querySelector('.text__description');
 
   commentInput.addEventListener('invalid', function () {
     if (commentInput.validity.tooLong) {
@@ -28,7 +43,7 @@
     }
   });
 
-  var hashtagInput = document.querySelector('.text__hashtags');
+  var hashtagInput = form.querySelector('.text__hashtags');
 
   hashtagInput.addEventListener('input', function () {
     var hashtagError = validateHashtags(hashtagInput.value);
@@ -75,16 +90,89 @@
     return '';
   };
 
-  var onUploadPreviewEscPress = function (evt) {
-    if (evt.keyCode === ESC_KEYCODE && !commentInput.matches(':focus') && !hashtagInput.matches(':focus')) {
+  form.addEventListener('submit', function (formEvt) {
+    formEvt.preventDefault();
+
+    window.save(new FormData(form), function () {
+      resetForm();
       closeUploadPreview();
-    }
+      openSuccess();
+    }, errorHandler);
+  });
+
+  var errorHandler = function () {
+    resetForm();
+    closeUploadPreview();
+    openError();
   };
 
-  var closeUploadPreview = function () {
-    uploadPreview.classList.add('hidden');
-    document.removeEventListener('keydown', onUploadPreviewEscPress);
-    uploadInput.value = '';
+  var resetForm = function () {
+    document.querySelector('#effect-heat').checked = true;
+    hashtagInput.value = '';
+    commentInput.value = '';
+  };
+
+  var openSuccess = function () {
+    var successTemplate = document.querySelector('#success')
+      .content;
+
+    var successPopup = successTemplate.cloneNode(true).firstElementChild;
+    var main = document.querySelector('main');
+
+    main.appendChild(successPopup);
+
+    var successButton = document.querySelector('.success__button');
+
+    var closeSuccess = function () {
+      main.removeChild(successPopup);
+      successButton.removeEventListener('click', closeSuccess);
+      document.removeEventListener('keydown', EscSuccessHandler);
+    };
+
+    successButton.addEventListener('click', closeSuccess);
+
+    var EscSuccessHandler = function (evt) {
+      if (evt.keyCode === window.ESC_KEYCODE) {
+        closeSuccess();
+      }
+    };
+
+    document.addEventListener('keydown', EscSuccessHandler);
+
+    successPopup.addEventListener('click', function (evt) {
+      if (evt.target === successPopup) {
+        closeSuccess();
+      }
+    });
+  };
+
+  var openError = function () {
+    var errorTemplate = document.querySelector('#error')
+      .content;
+
+    var errorPopup = errorTemplate.cloneNode(true).firstElementChild;
+    var main = document.querySelector('main');
+
+    main.appendChild(errorPopup);
+
+    var closeError = function () {
+      main.removeChild(errorPopup);
+      document.removeEventListener('keydown', EscErrorHandler);
+    };
+
+    var EscErrorHandler = function (evt) {
+      if (evt.keyCode === 27) {
+        closeError();
+      }
+    };
+
+    document.addEventListener('keydown', EscErrorHandler);
+
+    errorPopup.addEventListener('click', function (evt) {
+      if (evt.target === errorPopup || evt.target.matches('.error__button')) {
+        closeError();
+      }
+    });
   };
 
   uploadInput.addEventListener('change', onUploadInputChange);
