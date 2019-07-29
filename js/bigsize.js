@@ -16,22 +16,40 @@
     likesCount.textContent = photo.likes;
     commentsCount.textContent = photo.comments.length;
 
-    socComments.innerHTML = '';
+    var renderComments = function (comments, count) {
+      socComments.innerHTML = '';
 
-    for (var i = 0; i < photo.comments.length; i++) {
-      socComments.innerHTML +=
-      '<li class="social__comment">'
-      + '<img class="social__picture" src="img/avatar-' + Math.floor(Math.random() * 6 + 1) + '.svg"'
-      + 'alt="Аватар комментатора фотографии"'
-      + 'width="35" height="35">'
-      + '<p class="social__text">' + photo.comments[i].message + '</p>'
-      + '</li>';
-    }
+      for (var i = 0; i < comments.length && i < count; i++) {
+        socComments.innerHTML +=
+        '<li class="social__comment">'
+        + '<img class="social__picture" src="img/avatar-' + Math.floor(Math.random() * 6 + 1) + '.svg"'
+        + 'alt="Аватар комментатора фото"'
+        + 'width="35" height="35">'
+        + '<p class="social__text">' + comments[i].message + '</p>'
+        + '</li>';
+      }
+
+      if (count > comments.length) {
+        commentsLoad.classList.add('visually-hidden');
+      } else {
+        commentsLoad.classList.remove('visually-hidden');
+      }
+    };
+
+    var commentCounter = 5;
+
+    renderComments(photo.comments, commentCounter);
+
+    var buttonComments = document.querySelector('.comments-loader');
+
+    buttonComments.addEventListener('click', function () {
+      commentCounter += 5;
+      renderComments(photo.comments, commentCounter);
+    });
 
     description.textContent = photo.description;
 
     socCommentsCount.classList.add('visually-hidden');
-    commentsLoad.classList.add('visually-hidden');
 
     var picCancel = document.querySelector('#picture-cancel');
 
