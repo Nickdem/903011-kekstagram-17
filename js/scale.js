@@ -37,9 +37,4 @@
 
   scaleControlBigger.addEventListener('click', onScaleBiggerClick);
   scaleControlSmaller.addEventListener('click', onScaleSmallerClick);
-
-  var window.resetScale = function () {
-    scaleControlBigger.removeEventListener('click', onScaleBiggerClick);
-    scaleControlSmaller.removeEventListener('click', onScaleSmallerClick);
-  };
 })();
