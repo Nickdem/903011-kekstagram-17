@@ -9,13 +9,14 @@
   var uploadInput = uploadWindow.querySelector('#upload-file');
   var uploadCancelButton = uploadWindow.querySelector('#upload-cancel');
   var slider = document.querySelector('.effect-level');
-  var imagePreviewElement = document.querySelector('.img-upload__preview');
+  var previewImage = window.uploadWindow.querySelector('.img-upload__preview');
 
   var openUploadPreview = function () {
     uploadPreview.classList.remove('hidden');
     slider.style.visibility = 'hidden';
     document.addEventListener('keydown', onUploadPreviewEscPress);
-    imagePreviewElement.style.filter = 'none';
+    previewImage.style.filter = 'none';
+    //imageInPreviewElement.style.transform = 'scale(1)';
   };
 
   var FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
