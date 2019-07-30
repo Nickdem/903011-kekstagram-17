@@ -16,7 +16,7 @@
     slider.style.visibility = 'hidden';
     document.addEventListener('keydown', onUploadPreviewEscPress);
     previewImage.style.filter = 'none';
-    //imageInPreviewElement.style.transform = 'scale(1)';
+    // imageInPreviewElement.style.transform = 'scale(1)';
   };
 
   var FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
