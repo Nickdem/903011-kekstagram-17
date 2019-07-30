@@ -27,7 +27,7 @@
     uploadPreview.classList.remove('hidden');
     slider.style.visibility = 'hidden';
     document.addEventListener('keydown', onUploadPreviewEscPress);
-    previewImage.style.transform = 'scale( 1 )';
+    previewImage.style.transform = 'scale(1)';
   };
 
   var FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
