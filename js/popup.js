@@ -11,12 +11,23 @@
   var slider = document.querySelector('.effect-level');
   var previewImage = window.uploadWindow.querySelector('.img-upload__preview');
 
+  var onUploadPreviewEscPress = function (evt) {
+    if (evt.keyCode === ESC_KEYCODE && !commentInput.matches(':focus') && !hashtagInput.matches(':focus')) {
+      closeUploadPreview();
+    }
+  };
+
+  var closeUploadPreview = function () {
+    uploadPreview.classList.add('hidden');
+    document.removeEventListener('keydown', onUploadPreviewEscPress);
+    uploadInput.value = '';
+  };
+
   var openUploadPreview = function () {
     uploadPreview.classList.remove('hidden');
     slider.style.visibility = 'hidden';
     document.addEventListener('keydown', onUploadPreviewEscPress);
     previewImage.style.filter = 'none';
-    // imageInPreviewElement.style.transform = 'scale(1)';
   };
 
   var FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
@@ -44,18 +55,6 @@
 
       reader.readAsDataURL(file);
     }
-  };
-
-  var onUploadPreviewEscPress = function (evt) {
-    if (evt.keyCode === ESC_KEYCODE && !commentInput.matches(':focus') && !hashtagInput.matches(':focus')) {
-      closeUploadPreview();
-    }
-  };
-
-  var closeUploadPreview = function () {
-    uploadPreview.classList.add('hidden');
-    document.removeEventListener('keydown', onUploadPreviewEscPress);
-    uploadInput.value = '';
   };
 
   var form = document.querySelector('.img-upload__form');
