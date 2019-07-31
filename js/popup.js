@@ -30,6 +30,7 @@
     document.addEventListener('keydown', onUploadPreviewEscPress);
     previewImage.style.transform = 'scale(1)';
     scaleControl.value = '100%';
+    previewImage.style.filter = 'none';
   };
 
   var FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
