@@ -10,6 +10,7 @@
   var uploadCancelButton = uploadWindow.querySelector('#upload-cancel');
   var slider = document.querySelector('.effect-level');
   var previewImage = window.uploadWindow.querySelector('.img-upload__preview');
+  var scaleControl = window.uploadWindow.querySelector('.scale__control--value');
 
   var onUploadPreviewEscPress = function (evt) {
     if (evt.keyCode === ESC_KEYCODE && !commentInput.matches(':focus') && !hashtagInput.matches(':focus')) {
@@ -28,6 +29,7 @@
     slider.style.visibility = 'hidden';
     document.addEventListener('keydown', onUploadPreviewEscPress);
     previewImage.style.transform = 'scale(1)';
+    scaleControl.value = '100%';
   };
 
   var FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
