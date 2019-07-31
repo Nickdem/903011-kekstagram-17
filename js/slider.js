@@ -9,7 +9,6 @@
   var effectsListElement = document.querySelector('.effects__list');
 
   var initSlider = function () {
-
     effectsListElement.addEventListener('click', function (e) {
       sliderPinElement.style.left = '100%';
       sliderLevelElement.style.width = '100%';

@@ -9,13 +9,27 @@
   var uploadInput = uploadWindow.querySelector('#upload-file');
   var uploadCancelButton = uploadWindow.querySelector('#upload-cancel');
   var slider = document.querySelector('.effect-level');
-  var imagePreviewElement = document.querySelector('.img-upload__preview');
+  var previewImage = window.uploadWindow.querySelector('.img-upload__preview');
+  var scaleControl = window.uploadWindow.querySelector('.scale__control--value');
+
+  var onUploadPreviewEscPress = function (evt) {
+    if (evt.keyCode === ESC_KEYCODE && !commentInput.matches(':focus') && !hashtagInput.matches(':focus')) {
+      closeUploadPreview();
+    }
+  };
+
+  var closeUploadPreview = function () {
+    uploadPreview.classList.add('hidden');
+    document.removeEventListener('keydown', onUploadPreviewEscPress);
+    uploadInput.value = '';
+  };
 
   var openUploadPreview = function () {
     uploadPreview.classList.remove('hidden');
     slider.style.visibility = 'hidden';
     document.addEventListener('keydown', onUploadPreviewEscPress);
-    imagePreviewElement.style.filter = 'none';
+    previewImage.style.transform = 'scale(1)';
+    scaleControl.value = '100%';
   };
 
   var FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
@@ -43,18 +57,6 @@
 
       reader.readAsDataURL(file);
     }
-  };
-
-  var onUploadPreviewEscPress = function (evt) {
-    if (evt.keyCode === ESC_KEYCODE && !commentInput.matches(':focus') && !hashtagInput.matches(':focus')) {
-      closeUploadPreview();
-    }
-  };
-
-  var closeUploadPreview = function () {
-    uploadPreview.classList.add('hidden');
-    document.removeEventListener('keydown', onUploadPreviewEscPress);
-    uploadInput.value = '';
   };
 
   var form = document.querySelector('.img-upload__form');
