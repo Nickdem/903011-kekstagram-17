@@ -24,5 +24,5 @@
     });
   };
 
-  window.changeSaturation = changeSaturation;
+  window.filter = changeSaturation;
 })();

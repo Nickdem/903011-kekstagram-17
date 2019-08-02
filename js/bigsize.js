@@ -1,16 +1,16 @@
 'use strict';
 
 (function () {
-  window.bigsize = function (photo) {
-    var bigPic = document.querySelector('.big-picture');
-    var picUrl = bigPic.querySelector('.big-picture__img img');
-    var likesCount = bigPic.querySelector('.likes-count');
-    var commentsCount = bigPic.querySelector('.comments-count');
-    var socComments = document.querySelector('.social__comments');
-    var description = document.querySelector('.social__caption');
-    var socCommentsCount = document.querySelector('.social__comment-count');
-    var commentsLoad = document.querySelector('.comments-loader');
+  var bigPic = document.querySelector('.big-picture');
+  var picUrl = bigPic.querySelector('.big-picture__img img');
+  var likesCount = bigPic.querySelector('.likes-count');
+  var commentsCount = bigPic.querySelector('.comments-count');
+  var socComments = document.querySelector('.social__comments');
+  var description = document.querySelector('.social__caption');
+  var socCommentsCount = document.querySelector('.social__comment-count');
+  var commentsLoad = document.querySelector('.comments-loader');
 
+  var getBigPic = function (photo) {
     bigPic.classList.remove('hidden');
     picUrl.src = photo.url;
     likesCount.textContent = photo.likes;
@@ -40,9 +40,7 @@
 
     renderComments(photo.comments, commentCounter);
 
-    var buttonComments = document.querySelector('.comments-loader');
-
-    buttonComments.addEventListener('click', function () {
+    commentsLoad.addEventListener('click', function () {
       commentCounter += 5;
       renderComments(photo.comments, commentCounter);
     });
@@ -55,16 +53,16 @@
 
     var closeWindow = function () {
       bigPic.classList.add('hidden');
-      document.removeEventListener('keydown', EscPressHandler);
+      document.removeEventListener('keydown', escPressHandler);
     };
 
-    var EscPressHandler = function (evt) {
+    var escPressHandler = function (evt) {
       if (evt.keyCode === 27) {
         closeWindow();
       }
     };
 
-    document.addEventListener('keydown', EscPressHandler);
+    document.addEventListener('keydown', escPressHandler);
 
     picCancel.addEventListener('click', function () {
       closeWindow();
@@ -76,4 +74,6 @@
       }
     });
   };
+
+  window.bigsize = getBigPic;
 })();

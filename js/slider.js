@@ -22,7 +22,7 @@
       if (e.target.classList.contains('effects__preview')) {
         imageUploadElement.classList = 'img-upload__preview';
         imageUploadElement.classList.add(e.target.classList[1]);
-        window.changeSaturation(1);
+        window.filter(1);
       }
     });
 
@@ -42,7 +42,7 @@
           sliderLevelElement.style.width = (sliderPinElement.offsetLeft) + 'px';
         }
 
-        window.changeSaturation(sliderNumber);
+        window.filter(sliderNumber);
       };
 
       var onMouseUp = function (upE) {

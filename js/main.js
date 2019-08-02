@@ -63,14 +63,14 @@
     document.body.insertAdjacentElement('afterbegin', node);
   };
 
-  window.load(successHandler, errorHandler);
+  window.data.load(successHandler, errorHandler);
 
   var popular = picFilter.querySelector('#filter-popular');
   var news = picFilter.querySelector('#filter-new');
   var discussed = picFilter.querySelector('#filter-discussed');
 
   popular.addEventListener('click', window.debounce(function () {
-    window.load(successHandler, errorHandler);
+    window.data.load(successHandler, errorHandler);
     popular.classList.add('img-filters__button--active');
     news.classList.remove('img-filters__button--active');
     discussed.classList.remove('img-filters__button--active');
@@ -79,7 +79,7 @@
   ));
 
   news.addEventListener('click', window.debounce(function () {
-    window.load(function (images) {
+    window.data.load(function (images) {
       var compareRandom = function () {
         return Math.random() - 0.5;
       };
@@ -96,7 +96,7 @@
   }));
 
   discussed.addEventListener('click', window.debounce(function () {
-    window.load(function (images) {
+    window.data.load(function (images) {
       images.sort(function (first, second) {
         if (first.comments.length < second.comments.length) {
           return 1;
