@@ -20,7 +20,7 @@
   };
 
   window.data = {
-    load : function (onLoad, onError) {
+    load: function (onLoad, onError) {
       var xhr = new XMLHttpRequest();
       xhr.responseType = 'json';
 
@@ -44,7 +44,7 @@
       xhr.send();
     },
 
-    save : function (data, onLoad, onError) {
+    save: function (data, onLoad, onError) {
       var xhr = new XMLHttpRequest();
       xhr.responseType = 'json';
 
