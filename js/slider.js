@@ -1,32 +1,32 @@
 'use strict';
 
 (function () {
-  var sliderElement = document.querySelector('.effect-level');
-  var sliderLineElement = sliderElement.querySelector('.effect-level__line');
-  var sliderPinElement = sliderElement.querySelector('.effect-level__pin');
-  var sliderLevelElement = sliderElement.querySelector('.effect-level__depth');
-  var imageUploadElement = document.querySelector('.img-upload__preview');
-  var effectsListElement = document.querySelector('.effects__list');
+  var slider = document.querySelector('.effect-level');
+  var sliderLine = slider.querySelector('.effect-level__line');
+  var sliderPin = slider.querySelector('.effect-level__pin');
+  var sliderLevel = slider.querySelector('.effect-level__depth');
+  var previewImage = document.querySelector('.img-upload__preview');
+  var effectsList = document.querySelector('.effects__list');
 
   var initSlider = function () {
-    effectsListElement.addEventListener('click', function (e) {
-      sliderPinElement.style.left = '100%';
-      sliderLevelElement.style.width = '100%';
+    effectsList.addEventListener('click', function (e) {
+      sliderPin.style.left = '100%';
+      sliderLevel.style.width = '100%';
 
-      if (effectsListElement.querySelector('#effect-none').checked) {
-        sliderElement.style.visibility = 'hidden';
+      if (effectsList.querySelector('#effect-none').checked) {
+        slider.style.visibility = 'hidden';
       } else {
-        sliderElement.style.visibility = 'visible';
+        slider.style.visibility = 'visible';
       }
 
       if (e.target.classList.contains('effects__preview')) {
-        imageUploadElement.classList = 'img-upload__preview';
-        imageUploadElement.classList.add(e.target.classList[1]);
+        previewImage.classList = 'img-upload__preview';
+        previewImage.classList.add(e.target.classList[1]);
         window.filter(1);
       }
     });
 
-    sliderPinElement.addEventListener('mousedown', function (e) {
+    sliderPin.addEventListener('mousedown', function (e) {
       e.preventDefault();
       var startCoords = e.clientX;
 
@@ -34,12 +34,12 @@
         moveE.preventDefault();
 
         var shift = startCoords - moveE.clientX;
-        var sliderNumber = (sliderPinElement.offsetLeft / sliderLineElement.offsetWidth).toFixed(1);
+        var sliderNumber = (sliderPin.offsetLeft / sliderLine.offsetWidth).toFixed(1);
         startCoords = moveE.clientX;
 
-        if (sliderPinElement.offsetLeft - shift >= 0 && sliderPinElement.offsetLeft - shift <= sliderLineElement.offsetWidth) {
-          sliderPinElement.style.left = (sliderPinElement.offsetLeft - shift) + 'px';
-          sliderLevelElement.style.width = (sliderPinElement.offsetLeft) + 'px';
+        if (sliderPin.offsetLeft - shift >= 0 && sliderPin.offsetLeft - shift <= sliderLine.offsetWidth) {
+          sliderPin.style.left = (sliderPin.offsetLeft - shift) + 'px';
+          sliderLevel.style.width = (sliderPin.offsetLeft) + 'px';
         }
 
         window.filter(sliderNumber);

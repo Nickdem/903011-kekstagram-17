@@ -12,6 +12,11 @@
   var slider = document.querySelector('.effect-level');
   var previewImage = window.uploadWindow.querySelector('.img-upload__preview');
   var scaleControl = window.uploadWindow.querySelector('.scale__control--value');
+  var imageInPreview = document.querySelector('.img-upload__preview img');
+  var effectsPreview = document.querySelectorAll('.effects__preview');
+  var form = document.querySelector('.img-upload__form');
+  var commentInput = form.querySelector('.text__description');
+  var hashtagInput = form.querySelector('.text__hashtags');
   var main = document.querySelector('main');
   var errorTemplate = document.querySelector('#error')
   .content;
@@ -40,9 +45,6 @@
     document.querySelector('#effect-none').checked = 'checked';
   };
 
-  var imageInPreviewElement = document.querySelector('.img-upload__preview img');
-  var effectsPreviewElements = document.querySelectorAll('.effects__preview');
-
   var onUploadInputChange = function () {
     openUploadPreview();
     var file = uploadInput.files[0];
@@ -55,8 +57,8 @@
       var reader = new FileReader();
 
       reader.addEventListener('load', function () {
-        imageInPreviewElement.src = reader.result;
-        effectsPreviewElements.forEach(function (item) {
+        imageInPreview.src = reader.result;
+        effectsPreview.forEach(function (item) {
           item.style.backgroundImage = 'url(' + reader.result + ')';
         });
         openUploadPreview();
@@ -66,16 +68,11 @@
     }
   };
 
-  var form = document.querySelector('.img-upload__form');
-  var commentInput = form.querySelector('.text__description');
-
   commentInput.addEventListener('invalid', function () {
     if (commentInput.validity.tooLong) {
       commentInput.setCustomValidity('Длина комментария не должна превышать 140 символов');
     }
   });
-
-  var hashtagInput = form.querySelector('.text__hashtags');
 
   hashtagInput.addEventListener('input', function () {
     var hashtagError = validateHashtags(hashtagInput.value);

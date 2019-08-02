@@ -3,7 +3,11 @@
 (function () {
   var pictureTemplate = document.querySelector('#picture')
     .content.querySelector('.picture');
-  var picturesElement = document.querySelector('.pictures');
+  var pictures = document.querySelector('.pictures');
+  var pictureFilter = document.querySelector('.img-filters');
+  var popular = pictureFilter.querySelector('#filter-popular');
+  var news = pictureFilter.querySelector('#filter-new');
+  var discussed = pictureFilter.querySelector('#filter-discussed');
 
   var createPicturesDOM = function (image) {
     var picture = pictureTemplate.cloneNode(true);
@@ -11,16 +15,16 @@
     picture.querySelector('.picture__comments').textContent = image.comments.length;
     picture.querySelector('.picture__likes').textContent = image.likes;
 
-    var picImg = picture.querySelector('.picture__img');
+    var pictureImg = picture.querySelector('.picture__img');
 
-    picImg.addEventListener('load', function () {
+    pictureImg.addEventListener('load', function () {
       loadImages += 1;
       if (totalImages === loadImages) {
         activateFilter();
       }
     });
 
-    picImg.addEventListener('click', function () {
+    pictureImg.addEventListener('click', function () {
       window.bigsize(image);
     });
 
@@ -29,10 +33,9 @@
 
   var totalImages = 0;
   var loadImages = 0;
-  var picFilter = document.querySelector('.img-filters');
 
   var activateFilter = function () {
-    picFilter.classList.remove('img-filters--inactive');
+    pictureFilter.classList.remove('img-filters--inactive');
   };
 
   var successHandler = function (images) {
@@ -43,12 +46,12 @@
       totalImages += 1;
     }
 
-    var photosRemoved = picturesElement.querySelectorAll('.picture');
+    var photosRemoved = pictures.querySelectorAll('.picture');
 
     for (i = 0; i < photosRemoved.length; i++) {
-      picturesElement.removeChild(photosRemoved[i]);
+      pictures.removeChild(photosRemoved[i]);
     }
-    picturesElement.appendChild(fragment);
+    pictures.appendChild(fragment);
   };
 
   var errorHandler = function (errorMessage) {
@@ -64,10 +67,6 @@
   };
 
   window.data.load(successHandler, errorHandler);
-
-  var popular = picFilter.querySelector('#filter-popular');
-  var news = picFilter.querySelector('#filter-new');
-  var discussed = picFilter.querySelector('#filter-discussed');
 
   popular.addEventListener('click', window.debounce(function () {
     window.data.load(successHandler, errorHandler);
