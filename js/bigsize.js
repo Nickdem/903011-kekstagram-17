@@ -3,7 +3,6 @@
 (function () {
   var AVATARS = 6;
   var MAX_COMMENTS = 5;
-  var NEW_COMMENTS = 5;
 
   var bigPicture = document.querySelector('.big-picture');
   var pictureUrl = bigPicture.querySelector('.big-picture__img img');
@@ -41,11 +40,15 @@
       }
     };
 
-    renderComments(photo.comments, MAX_COMMENTS);
+    var commentCounter = MAX_COMMENTS;
 
-    commentsLoad.addEventListener('click', function () {
-      MAX_COMMENTS += NEW_COMMENTS;
-      renderComments(photo.comments, MAX_COMMENTS);
+    renderComments(photo.comments, commentCounter);
+
+    var buttonComments = document.querySelector('.comments-loader');
+
+    buttonComments.addEventListener('click', function () {
+      commentCounter += MAX_COMMENTS;
+      renderComments(photo.comments, commentCounter);
     });
 
     description.textContent = photo.description;

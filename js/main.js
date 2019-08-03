@@ -40,17 +40,20 @@
 
   var successHandler = function (images) {
     var fragment = document.createDocumentFragment();
-    for (var i = 0; i < images.length; i++) {
-      var photoElement = createPicturesDOM(images[i]);
-      fragment.appendChild(photoElement);
+    var picture = null;
+
+    images.forEach(function (item) {
+      picture = createPicturesDOM(item);
+      fragment.appendChild(picture);
       totalImages += 1;
-    }
+    });
 
     var photosRemoved = pictures.querySelectorAll('.picture');
 
-    for (i = 0; i < photosRemoved.length; i++) {
-      pictures.removeChild(photosRemoved[i]);
-    }
+    photosRemoved.forEach(function (el) {
+      el.remove();
+    });
+
     pictures.appendChild(fragment);
   };
 
