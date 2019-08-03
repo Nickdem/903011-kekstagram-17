@@ -2,7 +2,8 @@
 
 (function () {
   var FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
-  var ESC_KEYCODE = 27;
+  var HASHTAG_MAX_LENGTH = 20;
+  var MAX_HASHTAGS = 5;
 
   var uploadWindow = document.querySelector('.img-upload');
   window.uploadWindow = uploadWindow;
@@ -24,7 +25,7 @@
   .content;
 
   var onUploadPreviewEscPress = function (evt) {
-    if (evt.keyCode === ESC_KEYCODE && !commentInput.matches(':focus') && !hashtagInput.matches(':focus')) {
+    if (window.util.isEscPressed(evt) && !commentInput.matches(':focus') && !hashtagInput.matches(':focus')) {
       closeUploadPreview();
     }
   };
@@ -86,7 +87,7 @@
 
     var arrayHashtags = userInput.toLowerCase().split(' ');
 
-    if (arrayHashtags.length > 5) {
+    if (arrayHashtags.length > MAX_HASHTAGS) {
       return 'Вы не можете использовать больше 5 хэштегов';
     }
 
@@ -111,7 +112,7 @@
         return 'Вы уже использовали данный хэштег';
       }
 
-      if (hashtag.length > 20) {
+      if (hashtag.length > HASHTAG_MAX_LENGTH) {
         return 'Длина хэштега должна быть не больше 20 символов, включая решётку';
       }
     }
@@ -156,7 +157,7 @@
     successButton.addEventListener('click', closeSuccess);
 
     var escSuccessHandler = function (evt) {
-      if (evt.keyCode === window.ESC_KEYCODE) {
+      if (window.util.isEscPressed(evt)) {
         closeSuccess();
       }
     };
@@ -180,7 +181,7 @@
     };
 
     var escErrorHandler = function (evt) {
-      if (evt.keyCode === 27) {
+      if (window.util.isEscPressed(evt)) {
         closeError();
       }
     };

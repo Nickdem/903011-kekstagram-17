@@ -1,6 +1,10 @@
 'use strict';
 
 (function () {
+  var AVATARS = 6;
+  var MAX_COMMENTS = 5;
+  var NEW_COMMENTS = 5;
+
   var bigPicture = document.querySelector('.big-picture');
   var pictureUrl = bigPicture.querySelector('.big-picture__img img');
   var likesCount = bigPicture.querySelector('.likes-count');
@@ -11,7 +15,7 @@
   var commentsLoad = document.querySelector('.comments-loader');
   var pictureCancel = document.querySelector('#picture-cancel');
 
-  var getBigPic = function (photo) {
+  var getBigPicture = function (photo) {
     bigPicture.classList.remove('hidden');
     pictureUrl.src = photo.url;
     likesCount.textContent = photo.likes;
@@ -23,7 +27,7 @@
       for (var i = 0; i < comments.length && i < count; i++) {
         socComments.innerHTML +=
         '<li class="social__comment">'
-        + '<img class="social__picture" src="img/avatar-' + Math.floor(Math.random() * 6 + 1) + '.svg"'
+        + '<img class="social__picture" src="img/avatar-' + Math.floor(Math.random() * AVATARS + 1) + '.svg"'
         + 'alt="Аватар комментатора фото"'
         + 'width="35" height="35">'
         + '<p class="social__text">' + comments[i].message + '</p>'
@@ -37,13 +41,11 @@
       }
     };
 
-    var commentCounter = 5;
-
-    renderComments(photo.comments, commentCounter);
+    renderComments(photo.comments, MAX_COMMENTS);
 
     commentsLoad.addEventListener('click', function () {
-      commentCounter += 5;
-      renderComments(photo.comments, commentCounter);
+      MAX_COMMENTS += NEW_COMMENTS;
+      renderComments(photo.comments, MAX_COMMENTS);
     });
 
     description.textContent = photo.description;
@@ -56,7 +58,7 @@
     };
 
     var escPressHandler = function (evt) {
-      if (evt.keyCode === 27) {
+      if (window.util.isEscPressed(evt)) {
         closeWindow();
       }
     };
@@ -68,11 +70,11 @@
     });
 
     pictureCancel.addEventListener('keydown', function (evt) {
-      if (evt.keyCode === 13) {
+      if (window.util.isEnterPressed(evt)) {
         closeWindow();
       }
     });
   };
 
-  window.bigsize = getBigPic;
+  window.bigsize = getBigPicture;
 })();

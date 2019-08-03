@@ -68,7 +68,7 @@
 
   window.data.load(successHandler, errorHandler);
 
-  popular.addEventListener('click', window.debounce(function () {
+  popular.addEventListener('click', window.util.debounce(function () {
     window.data.load(successHandler, errorHandler);
     popular.classList.add('img-filters__button--active');
     news.classList.remove('img-filters__button--active');
@@ -77,7 +77,7 @@
 
   ));
 
-  news.addEventListener('click', window.debounce(function () {
+  news.addEventListener('click', window.util.debounce(function () {
     window.data.load(function (images) {
       var compareRandom = function () {
         return Math.random() - 0.5;
@@ -94,7 +94,7 @@
     }, errorHandler);
   }));
 
-  discussed.addEventListener('click', window.debounce(function () {
+  discussed.addEventListener('click', window.util.debounce(function () {
     window.data.load(function (images) {
       images.sort(function (first, second) {
         if (first.comments.length < second.comments.length) {
